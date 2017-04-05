@@ -1,14 +1,16 @@
-snippet chg "C header guard"
-#ifndef ${1:`!p
-if not snip.c:
-	import string
-	name = re.sub(r'[^A-Za-z0-9]+','_', snip.fn).upper()
-	snip.rv = ('_%s_' % (name)).upper()
-else:
-	snip.rv = snip.c`}
-#define $1
+global !p
+def header_name():
+  import string
+  name = re.sub(r'[^A-Za-z0-9]+','_', snip.fn).upper()
+  name = ('%s_H_' % name).upper()
+  return name
+endglobal
 
-${VISUAL}${0}
+snippet once "header include guard"
+#ifndef `!p snip.rv = header_name()`
+#define `!p snip.rv = header_name()`
+
+$0
 
 #endif
 endsnippet

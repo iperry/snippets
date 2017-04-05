@@ -1,8 +1,9 @@
 global !p
 def year():
-	import datetime
-	now = datetime.datetime.now()
-	return now.strftime("%Y")
+  import datetime
+  now = datetime.datetime.now()
+  return now.strftime("%Y")
+
 endglobal
 
 snippet glic "Google Ara License"
@@ -34,5 +35,12 @@ snippet glic "Google Ara License"
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-${1}
+endsnippet
+
+snippet leaflicense "LeafLabs license"
+/*
+ * Copyright (c) `!p snip.rv = year()` LeafLabs, LLC.
+ * All rights reserved.
+ */
+
 endsnippet
