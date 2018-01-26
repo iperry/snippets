@@ -1,8 +1,11 @@
 global !p
 def header_name():
   import string
-  name = re.sub(r'[^A-Za-z0-9]+','_', snip.fn).upper()
-  name = ('%s_H_' % name).upper()
+  project_name = snip.opt('g:project', '')
+
+  filename = re.sub(r'[^A-Za-z0-9]+','_', snip.fn)
+
+  name = ('_%s_%s_' % (project_name, filename)).upper()
   return name
 endglobal
 
