@@ -1,12 +1,28 @@
 global !p
+import os
+import string
+def find_vcs_root(test, dirs=(".git",), default=None):
+  prev, test = None, os.path.abspath(test)
+  while prev != test:
+    if any(os.path.isdir(os.path.join(test, d)) for d in dirs):
+      return test
+    prev, test = test, os.path.abspath(os.path.join(test, os.pardir))
+  return default
+
+# Generate a Google style define guard, based on project name
 def header_name():
-  import string
-  project_name = snip.opt('g:project', '')
+  name = ''
 
-  filename = re.sub(r'[^A-Za-z0-9]+','_', snip.fn)
+  # Find the root project directory, if any
+  rootdir = find_vcs_root(os.path.dirname(path))
+  if rootdir:
+    # Add the directory name as project name
+    name += '%s_' % os.path.basename(rootdir)
 
-  name = ('_%s_%s_' % (project_name, filename)).upper()
-  return name
+  filename = re.sub(r'[^A-Za-z0-9]+','_', path)
+  name += '%s_' % filename
+
+  return name.upper()
 endglobal
 
 snippet once "header include guard"
