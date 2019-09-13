@@ -19,8 +19,8 @@ def header_name():
     # Add the directory name as project name
     name += '%s_' % os.path.basename(rootdir)
 
-  filename = re.sub(r'[^A-Za-z0-9]+','_', path)
-  name += '%s_' % filename
+  name += '%s_' % path
+  name = re.sub(r'[^A-Za-z0-9]+','_', name)
 
   return name.upper()
 endglobal
