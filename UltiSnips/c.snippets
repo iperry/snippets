@@ -25,15 +25,6 @@ def header_name():
   return name.upper()
 endglobal
 
-snippet once "header include guard"
-#ifndef `!p snip.rv = header_name()`
-#define `!p snip.rv = header_name()`
-
-$0
-
-#endif
-endsnippet
-
 snippet cfd "doxygen function header"
 /**
  * @brief $1
